@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Current Public IP Address</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $.getJSON("https://api.ipify.org?format=json", function(data) {
+        $("#ip-address").text(data.ip);
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Current Public IP Address</h1>
+  <p>Your IP address is: <span id="ip-address"></span></p>
+</body>
+</html>
