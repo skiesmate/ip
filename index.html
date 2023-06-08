@@ -2,16 +2,21 @@
 <html>
 <head>
   <title>Current Public IP Address</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $.getJSON("https://api.ipify.org?format=json", function(data) {
-        $("#ip-address").text(data.ip);
-      });
-    });
+    function getIPAddress() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.ipify.org?format=json", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          document.getElementById("ip-address").textContent = response.ip;
+        }
+      };
+      xhr.send();
+    }
   </script>
 </head>
-<body>
+<body onload="getIPAddress()">
   <h1>Current Public IP Address</h1>
   <p>Your IP address is: <span id="ip-address"></span></p>
 </body>
